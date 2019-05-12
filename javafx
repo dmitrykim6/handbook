@@ -1,0 +1,22 @@
+// ----------------- Как поймать и обработать событие изменения содержимого поля TextField?
+field.textProperty().addListener((observable, oldValue, newValue)->{...});
+
+// ----------------- build.gradle add UTF-8
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+test {
+    systemProperty "file.encoding", "utf-8"
+}
+
+// ----------------- add UTF-8 to mySQL req
+    public Connection getDbConnection() throws ClassNotFoundException, SQLException{
+
+        String connectionString = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + dbName + "?useUnicode=true&characterEncoding=UTF-8";
+        Class.forName("com.mysql.jdbc.Driver");
+        dbConnection = DriverManager.getConnection(connectionString, dbUser, dbPass);
+        return dbConnection;
+    }
